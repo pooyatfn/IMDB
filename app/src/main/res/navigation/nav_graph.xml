@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/search">
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.imdb.search.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_search_to_movieDetail"
+            app:destination="@id/movieDetail">
+            <argument
+                android:name="title"
+                app:argType="string" />
+            <argument
+                android:name="year"
+                app:argType="string" />
+            <argument
+                android:name="imdbID"
+                app:argType="string" />
+            <argument
+                android:name="type"
+                app:argType="string" />
+            <argument
+                android:name="poster"
+                app:argType="string" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetail"
+        android:name="com.example.imdb.MovieDetail"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
+</navigation>
