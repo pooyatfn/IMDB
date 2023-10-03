@@ -35,7 +35,7 @@ class Search : Fragment() {
             movieAdapter.notifyDataSetChanged()
         }
 
-        movieViewModel.getApiData("Batman", "6f818fe4")
+        movieViewModel.getApiData("6f818fe4", "Batman")
         return binding.root
     }
 
