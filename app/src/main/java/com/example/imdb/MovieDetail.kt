@@ -17,6 +17,14 @@ class MovieDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val title = arguments?.getString("title")
+        val year = arguments?.getString("year")
+        val imdbID = arguments?.getString("imdbID")
+        val type = arguments?.getString("type")
+        val poster = arguments?.getString("poster")
+
+
+
         return binding.root
     }
 
