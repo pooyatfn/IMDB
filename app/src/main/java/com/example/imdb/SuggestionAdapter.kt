@@ -1,39 +1,21 @@
-package com.example.imdb.search
+package com.example.imdb
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.imdb.MovieDetailDirections
 import com.example.imdb.databinding.ItemMovieSearchBinding
 import com.example.imdb.model.Movie
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import java.util.Locale
 
-class SearchAdapter(var mList: List<Movie>) : RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterable{
+class SuggestionAdapter(private val dataSet: Array<Movie>) :
+    RecyclerView.Adapter<SuggestionAdapter.ViewHolder>() {
 
-    var filteredList = mList
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ItemMovieSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val made = filteredList[position]
-        holder.bind(made)
-    }
-
-    override fun getItemCount(): Int {
-        return filteredList.size
-    }
-
-    // Holds the views for adding it to image and text
+    /**
+     * Provide a reference to the type of views that you are using
+     * (custom ViewHolder)
+     */
     class ViewHolder(private val binding: ItemMovieSearchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.movieTitle.text = movie.Title
@@ -100,33 +82,20 @@ class SearchAdapter(var mList: List<Movie>) : RecyclerView.Adapter<SearchAdapter
         }
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val query = constraint.toString().lowercase(Locale.getDefault())
-                val filteredData: List<Movie> = if (query.isEmpty()) {
-                    emptyList()
-                } else {
-                    mList.filter {
-                        it.Title.lowercase(Locale.getDefault()).contains(query)
-                    }
-                }
-                val results = FilterResults()
-                results.values = filteredData
-                return results
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredList = results?.values as List<Movie>
-                notifyDataSetChanged()
-
-                //listener.onFilteredList(filteredList)
-            }
-        }
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding =
+            ItemMovieSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    interface OnFilteredListListener {
-        fun onFilteredList(filteredData: List<Movie>)
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val made = dataSet[position]
+        viewHolder.bind(made)
     }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = dataSet.size
+
 }

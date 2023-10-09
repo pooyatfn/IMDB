@@ -37,5 +37,14 @@
         <argument
             android:name="poster"
             app:argType="string" />
+        <argument
+            android:name="runtime"
+            app:argType="string" />
+        <argument
+            android:name="plot"
+            app:argType="string" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
     </action>
 </navigation>
