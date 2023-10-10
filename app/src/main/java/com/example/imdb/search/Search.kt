@@ -30,12 +30,10 @@ class Search : Fragment() {
         recyclerView.adapter = movieAdapter
 
         movieViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        movieViewModel.movieDataList.observe(viewLifecycleOwner) { movies ->
-            movieAdapter.mList = movies.Search
+        movieViewModel.searchData.observe(viewLifecycleOwner) { movies ->
+            movieAdapter.mList = movies?.Search ?: emptyList()
             movieAdapter.notifyDataSetChanged()
         }
-
-
 
         val searchView = binding.searchBar
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -46,12 +44,12 @@ class Search : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                movieAdapter.filter.filter(newText)
+                //movieAdapter.filter.filter(newText)
+                movieViewModel.search(newText.orEmpty())
                 return true
             }
         })
 
-        movieViewModel.getApiData("6f818fe4", "Batman")
         return binding.root
     }
 

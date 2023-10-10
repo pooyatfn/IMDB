@@ -23,28 +23,7 @@
         android:id="@+id/action_global_movie_detail"
         app:destination="@id/movieDetail">
         <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="year"
-            app:argType="string" />
-        <argument
-            android:name="imdbID"
-            app:argType="string" />
-        <argument
-            android:name="type"
-            app:argType="string" />
-        <argument
-            android:name="poster"
-            app:argType="string" />
-        <argument
-            android:name="runtime"
-            app:argType="string" />
-        <argument
-            android:name="plot"
-            app:argType="string" />
-        <argument
-            android:name="genre"
-            app:argType="string" />
+            android:name="movie"
+            app:argType="com.example.imdb.model.Movie" />
     </action>
 </navigation>

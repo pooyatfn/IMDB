@@ -12,7 +12,7 @@ object RetrofitInstance {
     fun getRetrofitInstance() : Retrofit{
 
         val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.HEADERS
         }
 
         val client : OkHttpClient = OkHttpClient.Builder().apply {
