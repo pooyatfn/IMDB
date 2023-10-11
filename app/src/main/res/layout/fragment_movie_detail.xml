@@ -8,8 +8,10 @@
 
     <ImageView
         android:id="@+id/movie_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -26,25 +28,42 @@
             <ImageView
                 android:id="@+id/lil_poster"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="180dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
                 app:layout_constraintEnd_toStartOf="@id/lil_poster"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/runtime"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:id="@+id/runtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toStartOf="@id/lil_poster"
+                    app:layout_constraintTop_toTopOf="@id/lil_poster" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/title"
@@ -52,24 +71,22 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/lil_poster"
-                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/year" />
+                app:layout_constraintTop_toBottomOf="@id/linear" />
 
 
             <TextView
                 android:id="@+id/plot"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="@id/lil_poster"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/social"
                 app:layout_constraintEnd_toStartOf="@id/lil_poster"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 
             <LinearLayout
-                android:id="@+id/linear"
+                android:id="@+id/social"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginVertical="15dp"
@@ -116,7 +133,7 @@
                 android:layout_marginVertical="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linear" />
+                app:layout_constraintTop_toBottomOf="@id/social" />
 
             <LinearLayout
                 android:id="@+id/genre"
@@ -129,10 +146,11 @@
 
             <TextView
                 android:id="@+id/suggestion"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Similar Suggestions"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genre" />
 
             <androidx.recyclerview.widget.RecyclerView
