@@ -26,8 +26,7 @@ class MovieDetail : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         movieViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         movieViewModel.search("")
@@ -36,7 +35,8 @@ class MovieDetail : Fragment() {
         movieViewModel.search(movie.Title)
 
         binding.apply {
-            suggestions.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            suggestions.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             Picasso.with(root.context).load(movie.Poster).into(movieImage)
             Picasso.with(root.context).load(movie.Poster).into(lilPoster)
@@ -47,7 +47,7 @@ class MovieDetail : Fragment() {
                 runtime.text = movie.Runtime
                 plot.text = movie.Plot
                 plot2.text = movie.Plot
-
+                rate.text = "IMDb: " + movie.imdbRating
 
                 if (movie.Genre.isNullOrBlank().not()) {
                     for (item in movie.Genre!!.split(",")) {
@@ -55,7 +55,7 @@ class MovieDetail : Fragment() {
                         texView.text = item.trim()
                         texView.background = GradientDrawable().apply {
                             cornerRadius = 100000f
-                            color = ColorStateList.valueOf(Color.RED)
+                            color = ColorStateList.valueOf(Color.rgb(175, 110, 210))
                         }
                         texView.setPadding(20, 10, 20, 10)
                         texView.setTextColor(Color.WHITE)
@@ -68,11 +68,9 @@ class MovieDetail : Fragment() {
 
             movieViewModel.searchData.observe(viewLifecycleOwner) { res ->
                 if (res != null) {
-                    suggestions.adapter = SuggestionAdapter(
-                        res.Search.filter {
-                            it.imdbID != movie.imdbID
-                        }
-                    )
+                    suggestions.adapter = SuggestionAdapter(res.Search.filter {
+                        it.imdbID != movie.imdbID
+                    })
                 }
             }
         }
