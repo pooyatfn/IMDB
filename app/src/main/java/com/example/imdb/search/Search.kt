@@ -33,6 +33,14 @@ class Search : Fragment() {
         movieViewModel.searchData.observe(viewLifecycleOwner) { movies ->
             movieAdapter.mList = movies?.Search ?: emptyList()
             movieAdapter.notifyDataSetChanged()
+
+            if (movieAdapter.mList.isEmpty()) {
+                binding.emptyState.visibility = View.VISIBLE
+                binding.rvSearchItems.visibility = View.GONE
+            } else {
+                binding.emptyState.visibility = View.GONE
+                binding.rvSearchItems.visibility = View.VISIBLE
+            }
         }
 
         val searchView = binding.searchBar
@@ -44,7 +52,6 @@ class Search : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                //movieAdapter.filter.filter(newText)
                 movieViewModel.search(newText.orEmpty())
                 return true
             }
